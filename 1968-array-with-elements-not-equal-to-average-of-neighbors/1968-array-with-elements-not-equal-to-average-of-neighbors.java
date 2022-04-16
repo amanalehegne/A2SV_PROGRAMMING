@@ -15,7 +15,7 @@ class Solution {
 			indx++;
 		}
 		
-		if (nums.length%2 != 0)
+		if (nums.length % 2 != 0)
             ans[indx] = nums[l];
 		
 		return ans;
