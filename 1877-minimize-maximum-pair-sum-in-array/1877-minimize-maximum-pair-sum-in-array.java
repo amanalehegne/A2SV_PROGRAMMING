@@ -10,8 +10,9 @@ class Solution {
 			arr[indx] = (nums[l] + nums[r]);
 			indx++; l++; r--;
 		}
-		Arrays.sort(arr);
 		
-		return arr[arr.length - 1];
+		int ans = Arrays.stream(arr).max().getAsInt();
+		
+		return ans;
     }
 }
