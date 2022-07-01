@@ -5,13 +5,17 @@ class MinStack {
     }
     
    Stack<Integer> stack = new Stack();
+	Stack<Integer> minStack = new Stack();
 	
 	    public void push(int val) {
+	        if(!stack.isEmpty()) minStack.push(Math.min(minStack.peek(), val));
+	        else minStack.push(val);
 	        stack.push(val);
 	    }
 	    
 	    public void pop() {
 	        stack.pop();
+	        minStack.pop();
 	    }
 	    
 	    public int top() {
@@ -19,12 +23,7 @@ class MinStack {
 	    }
 	    
 	    public int getMin() {
-	        List<Integer> list = new ArrayList(stack);
-	        Collections.sort(list);
-	        if(list.size() > 0)
-	        	return list.get(0);
-	        else
-	        	return -1;
+	        return minStack.peek();
 	    }
 }
 
