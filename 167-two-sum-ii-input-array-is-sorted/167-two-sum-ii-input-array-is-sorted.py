@@ -1,9 +1,17 @@
 class Solution:
     def twoSum(self, numbers: List[int], target: int) -> List[int]:
-        dic = {}
-        for i, val in enumerate(numbers):
-            if not dic.get(val):
-                dic[target - val] = [val, i]
+        l, r = 0, 1
+        while r < len(numbers):
+            sum_val = numbers[l] + numbers[r]
+            if sum_val == target:
+                return [l + 1, r + 1]
+            elif sum_val < target:
+                l += 1
+                r += 1
             else:
-                return [dic.get(val)[1] + 1, i + 1]
+                while sum_val > target and l >= 0:
+                    l -= 1
+                    sum_val = numbers[l] + numbers[r]
+                if sum_val == target:
+                    return [l + 1, r + 1]
         return []
