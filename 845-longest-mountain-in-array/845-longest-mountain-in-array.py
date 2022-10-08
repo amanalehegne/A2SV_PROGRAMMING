@@ -2,21 +2,20 @@ class Solution:
     def longestMountain(self, arr: List[int]) -> int:
         if len(arr) < 3:
             return 0
-        peek, valley = False, False
-        i = 0
-        ans = 0
+        rising, falling = False, False
+        i, mountain = 0, 0
         while i < len(arr) - 1:
             if arr[i] < arr[i + 1]:
                 temp = i
-                while i < len(arr) -1 and arr[i] < arr[i + 1]:
+                while i < len(arr) - 1 and arr[i] < arr[i + 1]:
+                    rising = True
                     i += 1
-                    peek = True
-                while i < len(arr) -1 and arr[i] > arr[i + 1]:
+                while i < len(arr) - 1 and arr[i] > arr[i + 1]:
+                    falling = True
                     i += 1
-                    valley = True
-                if peek and valley:
-                    ans = max(ans, i - temp + 1)
-                peek, valley = False, False
+                if rising and falling:
+                    mountain = max(mountain, i - temp + 1)
+                    rising, falling = False, False
             else:
                 i += 1
-        return ans
+        return mountain
