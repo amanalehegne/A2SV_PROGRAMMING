@@ -5,19 +5,11 @@
 #         self.next = next
 class Solution:
     def middleNode(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        obj = ListNode()
-        ans = obj
-        count = 0
-        temp = head
-        while temp is not None:
-            temp = temp.next
-            count += 1
-        index = 0
-        while head is not None:
-            if index >= count // 2:
-                ans.next = ListNode(head.val)
-                ans = ans.next
-            head = head.next
-            index += 1
-        return obj.next
-        
+        slow = fast = head
+        # We have two pointers, fast and slow, fast goes twice as fast as the slow pointer, thus when it reach the end,
+        # the slow one will be at the middle - the slow will be at half of what the fast is, 
+        # if the fast is at the end, the slow will be at the middle
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+        return slow
