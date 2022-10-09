@@ -1,16 +1,16 @@
 class Solution:
     def numberOfSubarrays(self, nums: List[int], k: int) -> int:
-        l, r = 0, 0
-        odd = []
-        count = 0
-        while r < len(nums):
-            if nums[r] % 2 != 0:
-                odd.append(r)
-            while len(odd) > k:
-                if nums[l] % 2 != 0:
-                    odd.pop(0)
-                l += 1
-            if len(odd) == k:
-                count += odd[0] - l + 1
-            r += 1
-        return count
+        count = sub_array = 0
+        dic = {}
+        for i, val in enumerate(nums):
+            if val % 2 != 0:
+                count += 1
+            if count == k:
+                sub_array += 1
+            if dic.get(count - k):
+                sub_array += dic.get(count - k)
+            if dic.get(count):
+                dic[count] += 1
+            else:
+                dic[count] = 1
+        return sub_array
