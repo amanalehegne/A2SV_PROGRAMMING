@@ -6,21 +6,14 @@
 class Solution:
     def deleteDuplicates(self, head: Optional[ListNode]) -> Optional[ListNode]:
         dummy = ListNode(0, head)
-        prev = dummy
-        current = head
-
-        while current and current.next:
-            if current.next and current.val == current.next.val:
-                # Get the last element of the duplicate
-                while current.next and current.val == current.next.val:
-                    current = current.next
-                # Once we get that move it to the unique element
-                current = current.next
-                # connect that to our previous node
-                prev.next = current
+        prev, cur = dummy, head
+        while cur and cur.next:
+            if cur.val == cur.next.val:
+                while cur.next and cur.val == cur.next.val:
+                    cur = cur.next
+                cur = cur.next
+                prev.next = cur
             else:
-                # If the element is unique, move to the next node
-                # For prev it's the current node, and or the current it's its next node
-                prev = current
-                current = current.next
+                prev = cur
+                cur = cur.next
         return dummy.next
