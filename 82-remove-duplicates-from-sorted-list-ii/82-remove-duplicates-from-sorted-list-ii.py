@@ -9,6 +9,7 @@ class Solution:
         prev, cur = dummy, head
         while cur and cur.next:
             if cur.val == cur.next.val:
+                # Our check condition is cur.next and not cur because we immediately check cur.next.val
                 while cur.next and cur.val == cur.next.val:
                     cur = cur.next
                 cur = cur.next
