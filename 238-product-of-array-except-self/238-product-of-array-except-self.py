@@ -7,12 +7,13 @@ class Solution:
                 zero = True
                 index = i
             elif zero and val == 0:
-                return ans
+                return [0 for i in range(len(nums))]
             else:
                 product *= val
         if zero:
-            ans[index] = product
+            nums = [0 for i in range(len(nums))]
+            nums[index] = product
         else:
             for i in range(len(ans)):
-                ans[i] = product // nums[i]
-        return ans
+                nums[i] = product // nums[i]
+        return nums
