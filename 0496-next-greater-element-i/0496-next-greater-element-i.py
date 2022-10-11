@@ -9,9 +9,11 @@ class Solution:
             while stack and num2[stack[-1]] < val:
                 dic[num2[stack.pop()]] = val
             stack.append(i)
-        while stack:
-            dic[num2[stack.pop()]] = -1
+        # If the number isn't in map, it means it has no greater element, thus we gave it a value of -1
         for i in range(len(num1)):
-            num1[i] = dic.get(num1[i])
+            if dic.get(num1[i]):
+                num1[i] = dic.get(num1[i])
+            else:
+                num1[i] = -1
 
         return num1
