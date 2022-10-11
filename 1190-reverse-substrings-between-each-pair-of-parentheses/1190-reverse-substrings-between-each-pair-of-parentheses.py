@@ -1,17 +1,17 @@
 class Solution:
     def reverseParentheses(self, s: str) -> str:
-        word = ""
         stack = []
         for i in s:
             if i != ')':
-                # print(i + "- Not Closing")
                 stack.append(i)
             else:
+                word = ""
                 while stack and stack[-1] != '(':
                     word += stack.pop()
-                if stack:
+                if stack[-1] == '(':
                     stack.pop()
-                for j in word:
-                    stack.append(j)
-                    word = word[1:]
+                i = 0
+                while i < len(word):
+                    stack.append(word[i])
+                    i += 1
         return "".join(stack)
