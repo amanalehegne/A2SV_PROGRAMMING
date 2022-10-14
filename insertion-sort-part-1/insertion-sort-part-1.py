@@ -16,12 +16,12 @@ import sys
 
 def insertionSort1(n, arr):
     temp = arr[-1]
-    i = n - 1
-    while i > 0 and temp < arr[i - 1]:
-        arr[i] = arr[i - 1]
+    j = -2
+    while j >= -len(arr) and arr[j] > temp:
+        arr[j + 1] = arr[j]
+        j -= 1
         print(*arr)
-        i -= 1
-    arr[i] = temp
+    arr[j + 1] = temp
     print(*arr)
 
 if __name__ == '__main__':
