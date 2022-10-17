@@ -1,15 +1,16 @@
 class Solution:
     def partitionLabels(self, s: str) -> List[int]:
         dic = dict()
-        for i in range(len(s)):
-            dic[s[i]] = i
-
-        max_range = 0
-        temp = -1
+        for i, val in enumerate(s):
+            dic[val] = i
+        group_size = l = 0
         ans = []
         for i, val in enumerate(s):
-            max_range = max(max_range, dic[val])
-            if i == max_range:
-                ans.append(max_range - temp)
-                temp = max_range
+            group_size = max(group_size, dic[val])
+            if group_size == i:
+                ans.append(i - l + 1)
+                l = i + 1
         return ans
+                
+            
+        
