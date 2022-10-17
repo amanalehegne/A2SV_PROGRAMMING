@@ -1,16 +1,17 @@
 class Solution:
     def numberOfSubarrays(self, nums: List[int], k: int) -> int:
-        count = sub_array = 0
-        dic = {}
-        for i, val in enumerate(nums):
-            if val % 2 != 0:
+        prefix = count = 0
+        dic = dict()
+        for i in nums:
+            if i % 2:
+                prefix += 1
+            if prefix == k :
                 count += 1
-            if count == k:
-                sub_array += 1
-            if dic.get(count - k):
-                sub_array += dic.get(count - k)
-            if dic.get(count):
-                dic[count] += 1
+            if dic.get(prefix - k):
+                count += dic.get(prefix - k)
+
+            if dic.get(prefix):
+                dic[prefix] += 1
             else:
-                dic[count] = 1
-        return sub_array
+                dic[prefix] = 1
+        return count
