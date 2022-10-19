@@ -4,8 +4,9 @@ class Solution:
         for i in range(len(position)):
             dic[position[i]] = (target - position[i]) / speed[i]
         position.sort()
-        stack = []
+        prev = count = 0
         for i in range(1, len(position) + 1):
-            if (not stack) or (stack[-1] < dic[position[-i]]):
-                stack.append(dic[position[-i]])
-        return len(stack)
+            if prev < dic[position[-i]]:
+                prev = dic[position[-i]]
+                count += 1
+        return count
