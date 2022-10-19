@@ -5,18 +5,16 @@ class Solution:
             if i.lstrip('-').isdigit():
                 stack.append(i)
             else:
-                if stack:
-                    num1 = int(stack.pop())
-                    num2 = int(stack.pop())
-                    stack.append(self.evaluateExpression(num2, i, num1))
+                stack.append(self.oprand(int(stack.pop()), int(stack.pop()), i))
         return int(stack[-1])
-
-    def evaluateExpression(self, num1, op, num2):
-        if op == '+':
-            return num1 + num2
-        elif op == '-':
-            return num1 - num2
-        elif op == '*':
-            return num1 * num2
-        elif op == '/':
-            return num1 / num2
+    
+    def oprand(self, num1, num2, op):
+        if op == "+":
+            return num2 + num1
+        elif op == "-":
+            return num2 - num1
+        elif op == "*":
+            return num2 * num1
+        elif op == "/":
+            return num2 / num1
+        
