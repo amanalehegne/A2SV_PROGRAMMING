@@ -5,13 +5,10 @@ class Solution:
             if i != ')':
                 stack.append(i)
             else:
-                word = ""
-                while stack and stack[-1] != '(':
-                    word += stack.pop()
-                if stack[-1] == '(':
-                    stack.pop()
-                i = 0
-                while i < len(word):
-                    stack.append(word[i])
-                    i += 1
+                temp = []
+                while stack[-1] != '(':
+                    temp.append(stack.pop())
+                stack.pop()
+                while temp:
+                    stack.append(temp.pop(0))
         return "".join(stack)
