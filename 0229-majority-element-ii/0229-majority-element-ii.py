@@ -3,7 +3,6 @@ class Solution:
         ans, dic = [], dict()
         for i in nums:
             dic[i] = 1 + dic.get(i, 0)
-        for key in dic:
-            if dic.get(key) > len(nums) // 3:
-                ans.append(key)
+            if dic.get(i) == len(nums) // 3 + 1:
+                ans.append(i)
         return ans
