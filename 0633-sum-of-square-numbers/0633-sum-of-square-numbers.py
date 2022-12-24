@@ -1,14 +1,13 @@
 class Solution:
     def judgeSquareSum(self, c: int) -> bool:
-        rootC = int(c ** 0.5)
-        low, high = 0, rootC
-        while low <= high:
-            result = low ** 2 + high ** 2
-            if result == c:
+        first = 0
+        second = int(c ** 0.5)
+        while first <= second:
+            number = first**2 + second**2
+            if number == c:
                 return True
-            elif result > c:
-                high -= 1
+            elif number > c:
+                second -= 1
             else:
-                low += 1
-                
+                first += 1
         return False
