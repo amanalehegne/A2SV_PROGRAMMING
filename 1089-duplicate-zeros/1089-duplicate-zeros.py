@@ -1,15 +1,14 @@
 class Solution:
     def duplicateZeros(self, arr: List[int]) -> None:
-        index = 0
         length = len(arr)
+        index = 0
         while index < length:
-            if arr[index] == 0:
-                for i in range(length - 1, index, -1):
-                    arr[i] = arr[i - 1]
-                arr[index] = 0
+            num = arr[index]
+            if not num:
+                for i in range(length - index - 1):
+                    arr[length - 1 - i] = arr[length - 2 - i]
+                if index + 1 < length:
+                    arr[index] = 0
                 index += 2
             else:
                 index += 1
-
-
-        
