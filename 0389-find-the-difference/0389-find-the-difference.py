@@ -1,8 +1,9 @@
 class Solution:
     def findTheDifference(self, s: str, t: str) -> str:
-        s = "".join(sorted(s))
-        t = "".join(sorted(t))
-        for i in range(len(s)):
-            if s[i] != t[i]:
-                return t[i]
-        return t[-1]
+        elementsOnS = Counter(list(s))
+        for char in t:
+            if not elementsOnS.get(char):
+                return char
+            elementsOnS[char] -= 1
+                
+        
