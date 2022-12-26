@@ -9,11 +9,11 @@ class Solution:
         num2 = num2[::-1]
         for index1 in range(length1):
             for index2 in range(length2):
-                product = (ord(num1[index1]) - ord("0")) * (ord(num2[index2]) - ord("0"))
                 answerIndex = index1 + index2
-                answer[answerIndex] += product
-                answer[answerIndex + 1] += answer[answerIndex] // 10
-                answer[answerIndex] = answer[answerIndex] % 10
+                product = answer[answerIndex] + (ord(num1[index1]) - ord("0"))*(ord(num2[index2]) - ord("0"))
+                
+                answer[answerIndex] = product % 10
+                answer[answerIndex + 1] += product // 10
 
         emptySpace = 0
         answer = answer[::-1]
