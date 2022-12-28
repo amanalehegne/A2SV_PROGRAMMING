@@ -14,7 +14,7 @@ class Solution:
 
         answer = []
         for key in dic:
-            if len(dic.get(key)) > 1:
+            if len(dic.get(key)) - 1:
                 answer.append(dic.get(key))
 
         return answer
