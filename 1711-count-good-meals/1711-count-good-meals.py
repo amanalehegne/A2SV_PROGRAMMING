@@ -7,6 +7,7 @@ class Solution:
         for num in deliciousness:
             # Check if there exist a number that when added to our current number gave us
             # an answer that is a the root of 2 (2^N)
+            # Because our inner loop runs a constant of max(22), this is O(22*n) which is O(n)
             for i in range(22):
                 # If the that number exists, get its counts because they each yield a avalid pairs
                 # e.g num = 1, 1, 1 => we could have (num[0], num[1]), (num[0], num[2]), (num[1], num[2])
