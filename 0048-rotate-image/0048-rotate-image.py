@@ -8,10 +8,7 @@ class Solution:
             inner = length - i
             for j in range(inner):
                 index = length - 1 - j
-                # matrix[index][i], matrix[i][index] = matrix[i][index], matrix[index][i]
-                temp = matrix[index][i]
-                matrix[index][i] = matrix[i][index]
-                matrix[i][index] = temp
+                matrix[index][i], matrix[i][index] = matrix[i][index], matrix[index][i]
         for i in matrix:
             left = 0
             right = len(i) - 1
