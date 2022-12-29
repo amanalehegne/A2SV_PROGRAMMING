@@ -6,10 +6,7 @@ class Solution:
             for i in range(22):
                 if foods.get(2**i - num):
                     result += foods[2**i - num]
-            if foods.get(num):
-                foods[num] += 1
-            else:
-                foods[num] = 1
+            foods[num] = 1 + foods.get(num, 0)
         return result % ((10 ** 9) + 7)
 
 
