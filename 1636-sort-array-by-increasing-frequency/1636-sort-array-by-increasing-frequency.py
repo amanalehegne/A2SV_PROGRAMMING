@@ -1,6 +1,8 @@
 class Solution:
     def frequencySort(self, nums: List[int]) -> List[int]:
         def compare(x, y):
+            # Return 1 - Don't Swap
+            # Return -1 - Swap
             if x[1] > y[1]:
                 return 1
             elif x[1] < y[1]:
