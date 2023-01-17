@@ -1,12 +1,10 @@
 class Solution:
     def sortPeople(self, name: List[str], height: List[int]) -> List[str]:
         length = len(name)
-        temp = []
         for i in range(length):
-            temp.append([name[i], height[i]])
-        temp.sort(key= lambda x:x[1], reverse=True)
-        ans = []
-        for x, y in temp:
-            ans.append(x)
-        return ans
-        
+            for j in range(length - i - 1):
+                if height[j] < height[j + 1]:
+                    height[j], height[j + 1] = height[j + 1], height[j]
+                    name[j], name[j + 1] = name[j + 1], name[j]
+    
+        return name
