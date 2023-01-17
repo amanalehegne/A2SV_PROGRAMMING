@@ -1,15 +1,15 @@
 class Solution:
     def sortPeople(self, name: List[str], height: List[int]) -> List[str]:
-        length = len(name)
-
-        for i in range(length):
-            minIndex = i
-            for j in range(i + 1, length):
-                if height[minIndex] < height[j]:
-                    minIndex = j
-            if i != minIndex:
-                height[minIndex], height[i] = height[i], height[minIndex]
-                name[minIndex], name[i] = name[i], name[minIndex]
+        length = len(height)
+        for i in range(1, length):
+            val = height[i]
+            val2 = name[i]
+            j = i - 1
+            while j >= 0 and val > height[j]:
+                height[j + 1] = height[j]
+                name[j + 1] = name[j]
+                j -= 1
+            height[j + 1] = val
+            name[j + 1] = val2
             
-
         return name
