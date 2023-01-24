@@ -1,22 +1,22 @@
 class Solution:
     def validMountainArray(self, arr: List[int]) -> bool:
-        up = down = False
+        up = True
+        down = False
+        upCount = downCount = 0
         length = len(arr)
-        if length <= 1:
-            return False
-        # Move Up
         for idx in range(length - 1):
-            if arr[idx] < arr[idx + 1]:
-                up = True
-            else:
-                break
-        i = idx
-        # Move Down
-        for idx in range(i, length - 1):
-            if arr[idx] > arr[idx + 1]:
-                down = True
-            else:
-                return False
-        if up and down:
+            if up:
+                if arr[idx] < arr[idx + 1]:
+                    upCount += 1
+                else:
+                    up = False
+                    down = True
+            if down:
+                if arr[idx] > arr[idx + 1]:
+                    downCount += 1
+                else:
+                    break
+        if upCount and downCount and upCount + downCount == length - 1:
             return True
         return False
+        
