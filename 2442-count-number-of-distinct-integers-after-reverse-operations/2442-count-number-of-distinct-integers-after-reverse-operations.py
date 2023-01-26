@@ -3,10 +3,10 @@ class Solution:
         sets = set()
         length = len(nums)
         for i in range(length):
-            sets.add(nums[i])
-            sets.add(self.reverse(nums[i]))
+            reverse = self.reverse(nums[i])
+            nums.append(reverse)
 
-        return len(sets)
+        return len(set(nums))
 
 
     def reverse(self, num):
