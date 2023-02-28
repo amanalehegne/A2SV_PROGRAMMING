@@ -4,12 +4,11 @@ class Solution:
         if not n: return 1
         
         res = self.calc(x, n // 2)
-        res = res * res
         
         if n % 2:
-            return res * x
+            return res * res * x
         else:
-            return res
+            return res * res
     
     def myPow(self, x: float, n: int) -> float:
         temp = n
