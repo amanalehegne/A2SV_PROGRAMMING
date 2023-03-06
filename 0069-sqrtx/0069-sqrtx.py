@@ -1,9 +1,6 @@
 class Solution:
     def mySqrt(self, x: int) -> int:
-        """
-        1, 2, 3, 4
-        
-        """
+
         if x == 1: return 1
         left = 0
         right = x // 2
