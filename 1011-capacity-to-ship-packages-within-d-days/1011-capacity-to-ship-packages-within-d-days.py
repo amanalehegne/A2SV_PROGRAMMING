@@ -2,10 +2,8 @@ class Solution:
     def dayCount(self, arr, k):
         length = len(arr)
         runningSum = count = 0
-        left = 0
         for i in range(length):
             if runningSum + arr[i] > k:
-                left = i
                 count += 1
                 runningSum = 0
             runningSum += arr[i]
