@@ -7,19 +7,27 @@
 class Solution:
     def longestUnivaluePath(self, root: Optional[TreeNode]) -> int:
         res = 0
-        def helper(par, root):
+        def helper(root):
             nonlocal res
             if not root:
-                return 0
+                return [None, 0] 
                 
-            left = helper(root, root.left)
-            right = helper(root, root.right)
+            left = helper(root.left)
+            right = helper(root.right)
             
-            res = max(res, left + right)
+            if left[0] == root.val:
+                left[1] += 1
+            else:
+                left[1] = 0
             
-            if not par or (root.val == par.val):
-                return max(left, right) + 1
-            return 0
+            if right[0] == root.val:
+                right[1] += 1
+            else:
+                right[1] = 0
+            
+            res = max(res, left[1] + right[1])
+            
+            return [root.val, max(left[1], right[1])]
         
-        helper(None, root)
+        helper(root)
         return res
