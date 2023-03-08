@@ -1,12 +1,13 @@
 class Solution:
     def dayCount(self, arr, k):
         length = len(arr)
-        runningSum = count = 0
+        runningSum = 0
+        count = 1
         for i in range(length):
-            if runningSum + arr[i] > k:
-                count += 1
-                runningSum = 0
             runningSum += arr[i]
+            if runningSum > k:
+                count += 1
+                runningSum = arr[i]
         return count
     
     def shipWithinDays(self, weights: List[int], days: int) -> int:
@@ -16,10 +17,10 @@ class Solution:
         while start <= end:
             mid = start + (end - start) // 2
             getDay = self.dayCount(weights, mid)
-            if getDay < days:
-                end = mid - 1
-            else:
+            if getDay > days:
                 start = mid + 1
+            else:
+                end = mid - 1
 
         return start
         
