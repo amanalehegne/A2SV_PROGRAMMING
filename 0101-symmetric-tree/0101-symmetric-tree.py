@@ -7,10 +7,10 @@
 class Solution:
     def isSymmetric(self, root: Optional[TreeNode]) -> bool:
         def rec(leftSide, rightSide):
+            
             if not leftSide or not rightSide:
-                if leftSide or rightSide:
-                    return False
-                return True
+                # If one side exists and the other doesn't it is not symetrical
+                return not (leftSide or rightSide)
             
             if leftSide.val != rightSide.val:
                 return False
@@ -18,14 +18,10 @@ class Solution:
             left = rec(leftSide.left, rightSide.right)
             right = rec(leftSide.right, rightSide.left)
             
-            if left and right:
-                return True
-            return False
+            return (left and right)
             
         
-        check = rec(root.left, root.right)
-        
-        return check
+        return rec(root.left, root.right)
             
             
             
