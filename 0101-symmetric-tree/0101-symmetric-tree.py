@@ -6,22 +6,24 @@
 #         self.right = right
 class Solution:
     def isSymmetric(self, root: Optional[TreeNode]) -> bool:
-        check = True
         def rec(leftSide, rightSide):
-            nonlocal check
-            
             if not leftSide or not rightSide:
                 if leftSide or rightSide:
-                    check = False
-                return
+                    return False
+                return True
             
             if leftSide.val != rightSide.val:
-                check = False
+                return False
                 
-            x = rec(leftSide.left, rightSide.right)
-            y = rec(leftSide.right, rightSide.left)
+            left = rec(leftSide.left, rightSide.right)
+            right = rec(leftSide.right, rightSide.left)
+            
+            if left and right:
+                return True
+            return False
+            
         
-        rec(root.left, root.right)
+        check = rec(root.left, root.right)
         
         return check
             
