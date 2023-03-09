@@ -6,16 +6,15 @@
 #         self.right = right
 class Solution:
     def bstToGst(self, root: TreeNode) -> TreeNode:
-        count = 0
+        sumVal = [0]
         def helper(root):
-            nonlocal count
             if not root:
-                return 0
+                return
             
-            helper(root.right)
-            count += root.val
-            root.val = count
-            helper(root.left)
+            right = helper(root.right)
+            sumVal[0] += root.val
+            root.val = sumVal[0]
+            left = helper(root.left)
             
         helper(root)
         return root
