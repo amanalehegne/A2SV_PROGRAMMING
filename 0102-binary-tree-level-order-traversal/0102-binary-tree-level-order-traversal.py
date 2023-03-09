@@ -7,17 +7,15 @@
 class Solution:
     def levelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
         res = defaultdict(list)
-        def helper(root, level=1):
+        def helper(root, level):
             if not root:
-                return 0
+                return
 
             res[level].append(root.val)
 
             left = helper(root.left, level+1)
             right = helper(root.right, level+1)
-
-            return max(left, right) + 1
         
-        helper(root)
+        helper(root, 1)
         return list(res.values())
     
