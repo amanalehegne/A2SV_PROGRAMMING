@@ -10,6 +10,21 @@ class Solution:
             if not root:
                 return
             
+            # This will swap the entire subtree
+            """
+              1
+             / \
+            3   4
+            /\   \
+            5 6   7
+            
+            if we swap 3 and 4 the tree will become
+              1
+             / \
+            4   3
+             \  /\
+              7 5 6
+            """
             temp = root.left
             root.left = root.right
             root.right = temp
