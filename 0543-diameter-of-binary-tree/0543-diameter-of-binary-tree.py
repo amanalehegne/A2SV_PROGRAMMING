@@ -10,10 +10,9 @@ class Solution:
         def helper(root):
             if not root:
                 return 0
-            
             left = helper(root.left)
             right = helper(root.right)
-
+            
             res[0] = max(res[0], left + right)
             return max(left, right) + 1
         
