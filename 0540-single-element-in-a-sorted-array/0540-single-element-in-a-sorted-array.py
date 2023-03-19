@@ -4,8 +4,6 @@ class Solution:
         length = len(arr)
         left = 0
         right = length - 1
-        if length < 3:
-            return arr[0]
         
         while left <= right:
             midPoint = left + (right - left) // 2
