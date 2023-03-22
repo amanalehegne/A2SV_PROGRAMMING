@@ -1,7 +1,9 @@
 class Solution:
     def distributeCookies(self, cookies: List[int], k: int) -> int:
         res = [float("inf")]
-        def backtrack(idx, people):
+        people = [0] * k
+        
+        def backtrack(idx):
             if idx >= len(cookies):
                 res[0] = min(res[0], max(people))
                 return
@@ -10,8 +12,8 @@ class Solution:
             for i in range(length):
                 people[i] += cookies[idx]
                 if people[i] < res[0]:
-                    backtrack(idx + 1, people)
+                    backtrack(idx + 1)
                 people[i] -= cookies[idx]
         
-        backtrack(0, [0] * k)
+        backtrack(0)
         return res[0]
