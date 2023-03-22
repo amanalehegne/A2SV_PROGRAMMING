@@ -4,6 +4,8 @@ class Solution:
         people = [0] * k
         
         def backtrack(idx, current_max):
+            if res[0] <= current_max:
+                return
             if idx >= len(cookies):
                 res[0] = min(res[0], current_max)
                 return
@@ -11,8 +13,8 @@ class Solution:
             length = len(people)
             for i in range(length):
                 people[i] += cookies[idx]
-                if people[i] < res[0]:
-                    backtrack(idx + 1, max(current_max, people[i]))
+                runningMax = max(current_max, people[i])
+                backtrack(idx + 1, runningMax)
                 people[i] -= cookies[idx]
         
         backtrack(0, 0)
