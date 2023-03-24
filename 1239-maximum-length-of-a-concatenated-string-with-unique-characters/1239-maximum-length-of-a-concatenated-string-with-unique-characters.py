@@ -2,18 +2,15 @@ class Solution:
     def maxLength(self, arr: List[str]) -> int:
         res = [0]
         def check(state, check):
-            
+            tmp = state[:]
+            tmp.append(check)
+            tmp = "".join(tmp)
             set_ = set()
-            for i in check:
+            for i in tmp:
                 if i in set_:
                     return False
                 set_.add(i)
-            
-            temp = "".join(state)
-            for i in check:
-                if i in temp:
-                    return False
-            
+
             return True
         
         
