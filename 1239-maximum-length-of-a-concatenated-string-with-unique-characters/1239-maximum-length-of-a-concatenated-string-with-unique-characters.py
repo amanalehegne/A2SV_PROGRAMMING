@@ -5,13 +5,7 @@ class Solution:
             tmp = state[:]
             tmp.append(check)
             tmp = "".join(tmp)
-            set_ = set()
-            for i in tmp:
-                if i in set_:
-                    return False
-                set_.add(i)
-
-            return True
+            return len(set(tmp)) == len(tmp)
         
         
         def backtrack(idx, state):
