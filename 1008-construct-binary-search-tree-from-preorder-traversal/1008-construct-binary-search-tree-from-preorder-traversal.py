@@ -6,34 +6,38 @@
 #         self.right = right
 class Solution:
     def bstFromPreorder(self, preorder: List[int]) -> Optional[TreeNode]:
-        # Normal Binary Tree Insertion
-        """
-        Steps:
-        1) Search The Binary Tree
-        2) Insert it There
-        """
-        
-        def bstSearch(prev, root, key):
-            if not root:
-                return prev
+        def binarySearch(arr, key):
+            left = 0
+            right = len(arr) - 1
             
-            if key < root.val:
-                return bstSearch(root, root.left, key)
-            else:
-                return bstSearch(root, root.right, key)
+            while left <= right:
+                midPoint = left + (right - left) // 2
+                
+                if arr[midPoint] == key:
+                    return midPoint
+                if arr[midPoint] > key:
+                    right = midPoint - 1
+                else:
+                    left = midPoint + 1
+            
+            return 0
         
-        root = TreeNode(preorder[0])
-        length = len(preorder)
+            
+        def helper(preorder, inorder):
+            if not preorder:
+                return None
+            
+            parent = preorder[0]
+            partition = binarySearch(inorder, parent)
+            
+            left = helper(preorder[1:partition + 1], inorder[:partition])
+            right = helper(preorder[partition + 1:], inorder[partition + 1:])
+            
+            node = TreeNode(parent, left, right)
+            
+            return node
         
-        for i in range(1, length):
-            val = preorder[i]
-            par = bstSearch(None, root, val)
-            node = TreeNode(val)
-            if val > par.val:
-                par.right = node
-            else:
-                par.left = node
-        
-        return root
+        res = helper(preorder, sorted(preorder))
+        return res
         
         
