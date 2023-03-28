@@ -42,7 +42,7 @@ class Solution:
         
         def solve(arr1, arr2, diff):
             for i in arr2:
-                ans[0] += bisect_left(arr1, i + diff)
+                ans[0] += bisect_right(arr1, i + diff)
 
             l1 = len(arr1)
             l2 = len(arr2)
@@ -72,7 +72,7 @@ class Solution:
             return res
         
         
-        def bisect_left(arr, target):
+        def bisect_right(arr, target):
             left = 0
             right = len(arr) - 1
 
