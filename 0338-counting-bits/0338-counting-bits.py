@@ -1,10 +1,13 @@
 class Solution:
     def countBits(self, n: int) -> List[int]:
         def bitCounter(y):
+            tmp = 1
             res = 0
-            while y:
-                res += (y & 1)
-                y = y >> 1
+            for i in range(17):
+                x = (y & tmp)
+                if x:
+                    res += 1
+                tmp = tmp << 1
             
             return res
         
