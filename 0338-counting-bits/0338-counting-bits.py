@@ -1,9 +1,8 @@
 class Solution:
     def countBits(self, n: int) -> List[int]:
-        
         def bitCounter(y):
             res = 0
-            for i in range(17):
+            while y:
                 res += (y & 1)
                 y = y >> 1
             
