@@ -1,33 +1,34 @@
 class Solution:
     def countMaxOrSubsets(self, nums: List[int]) -> int:
-        def findOr(arr):
-            length = len(arr)
-            res = arr[0]
-            for i in range(1, length):
-                res = res | arr[i]
-            
-            return res
+        val = [0]
+        size = len(nums)
+        for i in range(size):
+            val[0] |= nums[i]
         
-        maxVal = [nums[0]]
-        length = len(nums)
-        for i in range(1, length):
-            maxVal[0] = maxVal[0] | nums[i]
         
-        res = [0]
         
-        def backtrack(idx, arr):
-            length = len(nums)
-            if idx == length:
-                return 
-            for i in range(idx, length):
-                arr.append(nums[i])
-                val = findOr(arr)
-                if val == maxVal[0]:
-                    res[0] += 1
-                    
-                backtrack(i + 1, arr)
-                arr.pop()
+        def solve(nums, i):
+            idx = 0
+            res = 0
+            while i:
+                tmp = i & 1
+                if tmp:
+                    res |= nums[idx]
+                i >>= 1
+                idx += 1
+
+            if res == val[0]:
+                return True
+            return False
         
-        backtrack(0, [])
-            
-        return res[0]
+        size = len(nums)
+        num = 1 << size
+        
+        res = 0
+        for i in range(1, num):
+            check = solve(nums, i)
+            if check:
+                res += 1
+        
+        return res
+        
