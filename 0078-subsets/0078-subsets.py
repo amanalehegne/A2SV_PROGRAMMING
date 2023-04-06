@@ -1,21 +1,24 @@
 class Solution:
     def subsets(self, nums: List[int]) -> List[List[int]]:
-        res = []
         
-        def backtrack(idx, arr):
-            res.append(arr.copy())
-            if idx == len(nums):
-                return
-            
-            length = len(nums)
-            for i in range(idx, length):
-                arr.append(nums[i])
-                backtrack(i + 1, arr)
-                arr.pop()
+        def solve(nums, i):
+            idx = 0
+            res = []
+            while i:
+                val = i & 1
+                if val:
+                    res.append(nums[idx])
+                i >>= 1
+                idx += 1
+
+            return res
         
-        backtrack(0, [])
+        size = len(nums)
+        num = 1 << size
+        
+        res = [[]]
+        for i in range(1, num):
+            res.append(solve(nums, i))
+        
         return res
-        
-        
-            
         
