@@ -12,23 +12,18 @@ class Solution:
             adjList[y].append(x)
         
         seen = set()
-        
-        def dfs(vertex):
-            if vertex == destination:
+        stack = [source]
+        while stack:
+            node = stack.pop()
+            if node == destination:
                 return True
-            
-            arr = adjList[vertex]
-            seen.add(vertex)
-            for nextVer in arr:
-                if nextVer not in seen:
-                    check = dfs(nextVer)
-                    if check:
-                        return True
-            
-            return False
-    
-        return dfs(source)
+            arr = adjList[node]
+            seen.add(node)
+            for nextNode in arr:
+                if nextNode not in seen:
+                    stack.append(nextNode)
                 
+        return False
             
             
         
