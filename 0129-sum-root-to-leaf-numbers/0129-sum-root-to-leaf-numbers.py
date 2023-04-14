@@ -12,19 +12,20 @@ class Solution:
                 path.append(str(root.val))
                 val = int("".join(path))
                 path.pop()
-                res[0] += val
-                return
-                
+                return val
+            
+            count = 0
             if root.right:
                 path.append(str(root.val))
-                DFS(root.right, path)
+                count += DFS(root.right, path)
                 path.pop()
             if root.left:
                 path.append(str(root.val))
-                DFS(root.left, path)
+                count += DFS(root.left, path)
                 path.pop()
+            
+            return count
         
-        DFS(root, [])
-        return res[0]
+        return DFS(root, [])
                 
         
