@@ -23,18 +23,16 @@ class Solution:
         
         queue = deque(start)
         res = 0
-        seen = set()
         
         
         while queue:
             level = len(queue)
             for i in range(level):
                 row, col = queue.popleft()
-                seen.add((row, col))
                 for row_, col_ in dir_:
                     newRow = row + row_
                     newCol = col + col_
-                    if inRange(newRow, newCol) and ((newRow, newCol) not in seen) and grid[newRow][newCol] == 1:
+                    if inRange(newRow, newCol) and grid[newRow][newCol] == 1:
                         count -= 1
                         if count == 0:
                             return res + 1
