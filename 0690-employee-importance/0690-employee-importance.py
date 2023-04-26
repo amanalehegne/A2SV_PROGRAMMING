@@ -14,15 +14,17 @@ class Solution:
             dic[employee.id].append(employee.importance)
             dic[employee.id].append(employee.subordinates)
         
-        res = [0]
-        def DFT(node, seen=set()):
+
+        def DFT(node, res, seen=set()):
             subordinates = dic[node][-1]
-            res[0] += dic[node][0]
+            res += dic[node][0]
             seen.add(node)
             for node in subordinates:
                 if node not in seen:
-                    DFT(node)
+                    res = DFT(node, res)
+            return res
+            
         
-        DFT(id)
-        return res[0]
+        
+        return DFT(id, 0)
                     
