@@ -1,29 +1,36 @@
 class Solution:
     def validPath(self, n: int, edges: List[List[int]], source: int, destination: int) -> bool:
-        """
-        [0,1],[1,2],[2,0]]
-        0 - [1, 2]
-        1 - [0, 2]
-        2 - [1, 0]
-        """
-        adjList = defaultdict(list)
+        rep = {i:i for i in range(n)}
+        size = [1] * n
+        
+        def find(rep, node):
+            if node == rep[node]:
+                return node
+            rep[node] = find(rep, rep[node])
+            return rep[node]
+        
+        def union(rep, size, node1, node2):
+            node1 = find(rep, node1)
+            node2 = find(rep, node2)
+            
+            if node1 == node2:
+                return
+            size1, size2 = size[node1], size[node2]
+            if size1 > size2:
+                node1, node2 = node2, node1
+            
+            rep[node1] = node2
+            size[node2] += size[node1]
+        
+        def solution(rep, node1, node2):
+            node1, node2 = find(rep, node1), find(rep, node2)
+            return node1 == node2
+        
+        
         for x, y in edges:
-            adjList[x].append(y)
-            adjList[y].append(x)
+            union(rep, size, x, y)
+
+        return solution(rep, source, destination)
         
-        seen = set()
-        stack = [source]
-        while stack:
-            node = stack.pop()
-            if node == destination:
-                return True
-            arr = adjList[node]
-            seen.add(node)
-            for nextNode in arr:
-                if nextNode not in seen:
-                    stack.append(nextNode)
+        
                 
-        return False
-            
-            
-        
