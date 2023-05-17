@@ -34,41 +34,20 @@ class Solution:
 
         def check(grid, row, col):
             val = grid[row][col]
-            right = {1, 4, 6}
-            left = {1, 3, 5}
-            upper = {2, 5, 6}
-            lower = {2, 3, 4}
-            
-            if val == 1:
-                if isValidPosition(grid, (row, col - 1)) and grid[row][col - 1] in right:
-                    union(rep, size, (row, col), (row, col - 1))
-                if isValidPosition(grid, (row, col + 1)) and grid[row][col + 1] in left:
-                    union(rep, size, (row, col), (row, col + 1))
-            elif val == 2:
-                if isValidPosition(grid, (row - 1, col)) and grid[row - 1][col] in lower:
-                    union(rep, size, (row, col), (row - 1, col))
-                if isValidPosition(grid, (row + 1, col)) and grid[row + 1][col] in upper:
-                    union(rep, size, (row, col), (row + 1, col))
-            elif val == 3:
-                if isValidPosition(grid, (row, col - 1)) and grid[row][col - 1] in right:
-                    union(rep, size, (row, col), (row, col - 1))
-                if isValidPosition(grid, (row + 1, col)) and grid[row + 1][col] in upper:
-                    union(rep, size, (row, col), (row + 1, col))
-            elif val == 4:
-                if isValidPosition(grid, (row + 1, col)) and grid[row + 1][col] in right:
-                    union(rep, size, (row, col), (row + 1, col))
-                if isValidPosition(grid, (row + 1, col)) and grid[row + 1][col] in upper:
-                    union(rep, size, (row, col), (row + 1, col))
-            elif val == 5:
-                if isValidPosition(grid, (row - 1, col)) and grid[row - 1][col] in lower:
-                    union(rep, size, (row, col), (row - 1, col))
-                if isValidPosition(grid, (row, col - 1)) and grid[row][col - 1] in right:
-                    union(rep, size, (row, col), (row, col - 1))
-            elif val == 6:
-                if isValidPosition(grid, (row - 1, col)) and grid[row - 1][col] in lower:
-                    union(rep, size, (row, col), (row - 1, col))
-                if isValidPosition(grid, (row, col + 1)) and grid[row][col + 1] in left:
-                    union(rep, size, (row, col), (row, col + 1))
+            neighbors = {
+                1: [(0, -1, {1, 4, 6}), (0, 1, {1, 3, 5})],
+                2: [(-1, 0, {2, 5, 6}), (1, 0, {2, 3, 4})],
+                3: [(0, -1, {1, 4, 6}), (1, 0, {2, 5, 6})],
+                4: [(1, 0, {2, 5, 6}), (1, 0, {2, 3, 4})],
+                5: [(-1, 0, {2, 3, 4}), (0, -1, {1, 4, 6})],
+                6: [(-1, 0, {2, 3, 4}), (0, 1, {1, 3, 5})]
+            }
+
+            for dx, dy, valid_neighbors in neighbors[val]:
+                new_row, new_col = row + dx, col + dy
+                if isValidPosition(grid, (new_row, new_col)) and grid[new_row][new_col] in valid_neighbors:
+                    union(rep, size, (row, col), (new_row, new_col))
+
         
         def solution(rep, node1, node2):
             node1, node2 = find(rep, node1), find(rep, node2)
