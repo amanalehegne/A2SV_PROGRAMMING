@@ -1,10 +1,10 @@
 class Solution:
     def possibleBipartition(self, n: int, dislikes: List[List[int]]) -> bool:
-        if n == 5 and dislikes == [[1,2],[3,4],[4,5],[3,5]]:
-            return False
         def DFS(graph, color, stack):
             while stack:
                 node = stack.pop()
+                if color[node] == -1:
+                    color[node] = 0
                 for child in graph[node]:
                     if color[child] == -1:
                         stack.append(child)
@@ -23,14 +23,7 @@ class Solution:
         
         for i in range(n):
             val = i + 1
-            if val not in graph:
-                stack.append(val)
-                color[val] = 0
-        
-        for key in graph:
-            stack.append(key)
-            color[key] = 0
-            break
+            stack.append(val)
         
         return DFS(graph, color, stack)
                 
