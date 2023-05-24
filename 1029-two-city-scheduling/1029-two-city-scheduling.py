@@ -1,18 +1,13 @@
 class Solution:
     def twoCitySchedCost(self, costs: List[List[int]]) -> int:
-        arr = []
-        for cost1, cost2 in costs:
-            val = cost1 - cost2
-            arr.append([val, cost1, cost2])
-        
-        arr.sort()
+        costs.sort(key=lambda x:x[0] - x[1])
         size = len(costs)
         res = 0
         for i in range(size):
             if i < size // 2:
-                res += (arr[i][1])
+                res += (costs[i][0])
             else:
-                res += (arr[i][2])
+                res += (costs[i][1])
         
         return res
     
