@@ -8,5 +8,5 @@ class Solution:
             if arr[i + 1] - arr[i] > 1:
                 arr[i + 1] = (arr[i] + 1)
         
-        return max(arr)
+        return arr[-1]
         
