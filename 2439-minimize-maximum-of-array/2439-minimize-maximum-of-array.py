@@ -1,16 +1,11 @@
 class Solution:
     def minimizeArrayValue(self, nums: List[int]) -> int:
         size = len(nums)
-        val = sum(nums)
+        sum_ = res = 0
         
-        for i in range(size - 1):
-            idx = size - 1 - i
-            currentVal = ceil(val / (idx + 1))
-            if nums[idx] > currentVal:
-                temp = nums[idx] - currentVal
-                nums[idx] -= temp
-                nums[idx - 1] += temp
+        for i in range(size):
+            sum_ += nums[i]
+            res = max(res, ceil(sum_ / (i + 1)))
             
-            val -= nums[idx]
         
-        return max(nums)
+        return res
