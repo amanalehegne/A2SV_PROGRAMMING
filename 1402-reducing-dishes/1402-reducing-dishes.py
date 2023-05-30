@@ -15,7 +15,6 @@ class Solution:
         
         """
         satisfaction.sort(reverse=True)
-        print(satisfaction)
         
         size = len(satisfaction)
         res = 0
