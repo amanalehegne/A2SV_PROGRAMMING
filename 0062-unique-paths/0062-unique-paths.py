@@ -1,27 +1,21 @@
 class Solution:
     def uniquePaths(self, m: int, n: int) -> int:
-        def isValidPath(m, n, r, c):
-            return (0 <= r < m) and (0 <= c < n)
-            
-        dir_ = [(1, 0), (0, 1)]
+
+        def isValidPath(row, col):
+            return 0 <= row < m and 0 <= col < n
+
         
-        def rec(m, n, r, c, dic):
-            if r == m - 1 and c == n - 1:
-                return 1
-            
-            if (r, c) in dic:
-                return dic[(r, c)]
-            
-            total = 0
-            for row, col in dir_:
-                if isValidPath(m, n, r + row, c + col):
-                    val = rec(m, n, r + row, c + col, dic)
-                    total += val
-            
-            dic[(r, c)] = total
-            return dic[(r, c)]
+        grid = [[0 for _ in range(n)] for _ in range(m)]
+        grid[0][0] = 1    
         
-        return rec(m, n, 0, 0, dict())
+        for row in range(m):
+            for col in range(n):
+                rowVal = colVal = 0
+                if isValidPath(row - 1, col):
+                    rowVal = grid[row - 1][col]
+                if isValidPath(row, col - 1):
+                    colVal = grid[row][col - 1]
+    
+                grid[row][col] += rowVal + colVal
                 
-                    
-                
+        return grid[-1][-1]
