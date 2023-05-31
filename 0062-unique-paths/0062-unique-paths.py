@@ -1,21 +1,23 @@
 class Solution:
     def uniquePaths(self, m: int, n: int) -> int:
+    
+        prev = [0] * n
+        current = [0] * n
+        current[0] = 1
 
-        def isValidPosition(grid, node):
-            return 0 <= node[0] < len(grid) and 0 <= node[1] < len(grid[0])
-
-        
-        grid = [[0 for _ in range(n)] for _ in range(m)]
-        grid[0][0] = 1    
-        
         for row in range(m):
             for col in range(n):
                 rowVal = colVal = 0
-                if isValidPosition(grid, (row, col - 1)):
-                    colVal = grid[row][col - 1]
-                if isValidPosition(grid, (row - 1, col)):
-                    rowVal = grid[row - 1][col]
-    
-                grid[row][col] += rowVal + colVal
+                rowVal = prev[col]
+                if 0 <= col - 1 < n:
+                    colVal = current[col - 1]
+
+                current[col] += rowVal + colVal
+            
+            if row == m - 1:
+                return current[-1]
+            prev = current
+            current = [0] * n
+        
+        return -1
                 
-        return grid[-1][-1]
