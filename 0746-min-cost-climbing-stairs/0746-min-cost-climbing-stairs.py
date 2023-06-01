@@ -15,5 +15,5 @@ class Solution:
             return memo[idx]
         
         memo = dict()
-        return min(rec(0, memo), rec(1, memo))
+        return rec(-1, memo) - cost[-1]
         
